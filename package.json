@@ -1,0 +1,25 @@
+{
+    "name": "jwy-auth-react-node",
+    "version": "1.0.0",
+    "description": "по уроку:\r https://www.youtube.com/watch?v=fN25fMQZ2v0&list=PL6DxKON1uLOFQT7dzQH72cJip7i2sFzxw&index=5&ab_channel=UlbiTV",
+    "main": "index.js",
+    "scripts": {
+        "server": "npm --cwd server run dev",
+        "client": "npm --cwd client run start",
+        "start": "concurrently \"npm run server\" \"npm run client\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/titangro/jwy-auth-react-node.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/titangro/jwy-auth-react-node/issues"
+    },
+    "homepage": "https://github.com/titangro/jwy-auth-react-node#readme",
+    "dependencies": {
+        "concurrently": "^8.2.0"
+    }
+}
