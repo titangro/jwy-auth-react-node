@@ -2,6 +2,7 @@ const UserModel = require('../models/user-model');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const mailService = require('../service/mail-service');
+const tokenService = require('../service/token-service');
 
 const salt = 3;
 
@@ -23,6 +24,7 @@ class UserService {
             activationLink,
         });
         await mailService.sendActivationMail(email, activationLink);
+        const tokens = tokenService.generateTokens();
     }
 }
 
