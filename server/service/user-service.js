@@ -4,6 +4,7 @@ const uuid = require('uuid');
 const mailService = require('../service/mail-service');
 const tokenService = require('../service/token-service');
 const UserDto = require('../dtos/user-dto');
+const ApiError = require('../exceptions/api-error');
 
 const salt = 3;
 
@@ -13,7 +14,7 @@ class UserService {
             email,
         });
         if (candidate) {
-            throw new Error(
+            throw ApiError.BadRequest(
                 `Пользователь с почтовым адресом ${email} уже существует`,
             );
         }
@@ -45,7 +46,7 @@ class UserService {
             activationLink,
         });
         if (!user) {
-            throw new Error('Некорректная ссылка активации');
+            throw ApiError.BadRequest('Некорректная ссылка активации');
         }
         user.isActivated = true;
         await user.save();
