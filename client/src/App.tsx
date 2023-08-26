@@ -12,6 +12,10 @@ const App: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    if (store.isLoading) {
+        return <div>Загрузка...</div>;
+    }
+
     if (!store.isAuth) {
         return <LoginForm />;
     }
