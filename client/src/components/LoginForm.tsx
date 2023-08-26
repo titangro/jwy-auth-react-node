@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { Context } from '..';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { store } = useContext(Context);
 
     const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
@@ -11,11 +13,21 @@ const LoginForm = () => {
     const handleChangePassword = (
         event: React.ChangeEvent<HTMLInputElement>,
     ) => {
-        setEmail(event.target.value);
+        setPassword(event.target.value);
+    };
+
+    const submitLogin = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        store.login(email, password);
+    };
+
+    const submitRegistration = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        store.registration(email, password);
     };
 
     return (
-        <div>
+        <form>
             <input
                 type="text"
                 placeholder="Email"
@@ -23,14 +35,18 @@ const LoginForm = () => {
                 value={email}
             />
             <input
-                type="passsword"
+                type="password"
                 placeholder="Пароль"
                 onChange={handleChangePassword}
                 value={password}
             />
-            <button type="submit">Логин</button>
-            <button type="submit">Регистрация</button>
-        </div>
+            <button onClick={submitLogin} type="submit">
+                Логин
+            </button>
+            <button onClick={submitRegistration} type="submit">
+                Регистрация
+            </button>
+        </form>
     );
 };
 

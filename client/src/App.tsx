@@ -1,7 +1,12 @@
 import React from 'react';
+import LoginForm from './components/LoginForm';
 
 const App: React.FC = () => {
-    return <div>123</div>;
+    return (
+        <div>
+            <LoginForm />
+        </div>
+    );
 };
 
 export default App;

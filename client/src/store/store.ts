@@ -21,6 +21,10 @@ export default class Store {
     async login(email: string, password: string) {
         try {
             const response = await AuthService.login(email, password);
+            console.log(
+                '🚀 ~ file: store.ts:24 ~ Store ~ login ~ response:',
+                response,
+            );
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
@@ -32,6 +36,10 @@ export default class Store {
     async registration(email: string, password: string) {
         try {
             const response = await AuthService.registration(email, password);
+            console.log(
+                '🚀 ~ file: store.ts:35 ~ Store ~ registration ~ response:',
+                response,
+            );
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
