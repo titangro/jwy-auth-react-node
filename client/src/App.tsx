@@ -43,6 +43,11 @@ const App: React.FC = () => {
                     ? `Пользователь авторизован ${store.user.email}`
                     : 'АВТОРИЗУЙТЕСЬ'}
             </h1>
+            <h2>
+                {store.user.isActivated
+                    ? `Аккаунт подтвержден по почте`
+                    : 'ПОДТВЕРДИТЕ АККАУНТ!!!'}
+            </h2>
             <button onClick={handleLogout}>Выйти</button>
             <div>
                 <button onClick={handleGetUsers}>
