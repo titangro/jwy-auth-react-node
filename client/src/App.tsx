@@ -1,10 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import LoginForm from './components/LoginForm';
 import { Context } from '.';
 import { observer } from 'mobx-react-lite';
+import { IUser } from './models/IUser';
+import UserService from './services/UserService';
 
 const App: React.FC = () => {
     const { store } = useContext(Context);
+    const [users, setUsers] = useState<IUser[]>([]);
     useEffect(() => {
         if (localStorage.getItem('token')) {
             store.checkAuth();
@@ -24,6 +27,15 @@ const App: React.FC = () => {
         store.logout();
     };
 
+    const handleGetUsers = async () => {
+        try {
+            const response = await UserService.fetchUsers();
+            setUsers(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <div>
             <h1>
@@ -32,6 +44,23 @@ const App: React.FC = () => {
                     : 'АВТОРИЗУЙТЕСЬ'}
             </h1>
             <button onClick={handleLogout}>Выйти</button>
+            <div>
+                <button onClick={handleGetUsers}>
+                    Получить список пользователей
+                </button>
+            </div>
+            <div>
+                <h2>Список пользователей: </h2>
+                {users.length ? (
+                    <ul>
+                        {users.map((user, index) => (
+                            <div key={user.id}>{user.email}</div>
+                        ))}
+                    </ul>
+                ) : (
+                    <div>пуст</div>
+                )}
+            </div>
         </div>
     );
 };
